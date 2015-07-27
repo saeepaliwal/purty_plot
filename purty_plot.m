@@ -1,4 +1,5 @@
 function purty_plot(figNum, figurename)
+% Use purty_plot(figureNumber, desiredFigureName)
 addpath('./export_fig/')
 fontName = 'Open Sans Condensed';
 
