@@ -1,44 +1,38 @@
-function purty_plot(figNum)
-
-%{
-defaults.nIter = 30000;
-defaults.jobId = 1;
-defaults.dirOut = pwd;
-defaults.burnIn = 0;
-args = propval(varargin, defaults);
-
-%}
-%hFig, hAxes, hPlot,hLabel,hTitle,hLegend)
+function purty_plot(figNum, figurename)
+fontName = 'Open Sans Condensed';
 
 hFig = figNum;
 
 % Get axes:
 hAxes = get(hFig,'CurrentAxes');
+hPlot = [];
 
 % Get data axes
 hData = get(hAxes,'Children');
 hTitle = get(hAxes,'Title');
 hLegend =  findobj(hFig,'Type','axes','Tag','legend')
-hLabel = findobj(hFig,'Type','Text');
-keyboard
+hLabel = [get(hAxes,'xlabel') get(hAxes,'ylabel')];
+
 % Adjust fonts of the axis
 for l = 1:length(hAxes)
 	set(hAxes(l),  ...
-		'FontName','Helvetica' );
+		'FontName',fontName );
 end
+
 % Adjust the line smoothing
-%if ~isempty(hPlot)
-%	for k = 1:length(hPlot)
-%		set(hPlot(k), ...
-%			'LineSmoothing', 'on');
-%	end
-% end
+if ~isempty(hPlot)
+    for k = 1:length(hPlot)
+        set(hPlot(k), ...
+            'LineSmoothing', 'on',...
+            'LineWidth',2);
+    end
+end
 
 % Adjust fonts of the labels
 if ~isempty(hLabel)
 	for i = 1:length(hLabel)
 		set(hLabel(i), ...
-			'FontName'   , 'Helvetica',...
+			'FontName'   , fontName ,...
 			'FontSize'   , 15          );
 	end
 end
@@ -46,20 +40,20 @@ end
 % Make title purty:
 for j = 1:length(hTitle)
 	set(hTitle(j)                    , ...
-		'FontName'   , 'Helvetica', ...
-		'FontSize'   , 15          , ...
+		'FontName'   , fontName, ...
+		'FontSize'   , 18          , ...
 		'FontWeight' , 'bold'      );
 end
 
 % Make legend purty:
-set([hLegend]          ,...
-    'FontSize'   , 12         , ...
+set([hLegend]                , ...
+    'FontSize'   , 10       , ...
+    'FontName'   , fontName  , ...
 	'location', 'SouthWest'  );
 
 % Set axes properties
 set(hAxes, ...
   'Box'         , 'off'     , ...
-  'FontSize'    , 12         , ...
   'TickDir'     , 'out'     , ...
   'TickLength'  , [.02 .02] , ...
   'XMinorTick'  , 'on'      , ...
@@ -72,10 +66,6 @@ box off
 set(gcf, 'PaperPositionMode', 'auto');
 grid off
 
-export_fig('purtyplot.pdf','-transparent',hFig);
+figurename = [ figurename '.pdf'];
+export_fig(figurename,'-transparent',hFig);
 
-% Color pallettes:
-
-% deep carrot orange, fern green,
-% glaucous, 
-% deep coffee
