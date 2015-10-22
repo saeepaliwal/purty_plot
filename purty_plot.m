@@ -1,7 +1,7 @@
 function purty_plot(figNum, figurename)
 % Use purty_plot(figureNumber, desiredFigureName)
 addpath('./export_fig/')
-fontName = 'Open Sans Condensed';
+fontName = 'Helvetica';
 
 hFig = figNum;
 
@@ -12,13 +12,14 @@ hPlot = [];
 % Get data axes
 hData = get(hAxes,'Children');
 hTitle = get(hAxes,'Title');
-hLegend =  findobj(hFig,'Type','axes','Tag','legend')
+hLegend =  findobj(hFig,'Type','axes','Tag','legend');
 hLabel = [get(hAxes,'xlabel') get(hAxes,'ylabel')];
 
 % Adjust fonts of the axis
 for l = 1:length(hAxes)
 	set(hAxes(l),  ...
         'FontName',fontName , ...
+        'FontSize', 14, ...
         'Box'         , 'off'     , ...
         'GridLineStyle' , 'none'     , ...
         'TickDir'     , 'out'     , ...
@@ -46,7 +47,7 @@ if ~isempty(hLabel)
 	for i = 1:length(hLabel)
 		set(hLabel{i}, ...
 			'FontName'   , fontName ,...
-			'FontSize'   , 15          );
+			'FontSize'   , 14          );
 	end
 end
 
@@ -54,7 +55,7 @@ end
 for j = 1:length(hTitle)
 	set(hTitle{j}                    , ...
 		'FontName'   , fontName, ...
-		'FontSize'   , 18          , ...
+		'FontSize'   , 14          , ...
 		'FontWeight' , 'bold'      );
 end
 
