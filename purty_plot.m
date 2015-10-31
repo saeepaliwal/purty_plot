@@ -69,6 +69,6 @@ set(gcf, 'PaperPositionMode', 'auto');
 %figurename_eps = [ figurename '.eps'];
 %figurename_pdf =  [ figurename '.pdf'];
 figurename_png = [figurename '.png'];
-print(figurename_eps,'-dpng')
+print(figurename_png,'-dpng')
 %eps2pdf(figurename_eps, figurename_pdf)
 
