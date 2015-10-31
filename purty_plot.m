@@ -14,9 +14,16 @@ hTitle = get(hAxes,'Title');
 hLegend =  findobj(hFig,'Type','axes','Tag','legend');
 hLabel = [get(hAxes,'xlabel') get(hAxes,'ylabel')];
 
+
 % Adjust fonts of the axis
 for l = 1:length(hAxes)
-	set(hAxes(l),  ...
+    if iscell(hAxes)
+        axis = hAxes{l};
+    else
+        axis = hAxes(l);
+    end
+    
+	set(axis,  ...
         'FontName',fontName , ...
         'FontSize', 14, ...
         'Box'         , 'off'     , ...
@@ -34,8 +41,13 @@ end
 
 % Adjust the line smoothing
 if ~isempty(hPlot)
+    if iscell(hPlot)
+        plot = hPlot{k};
+    else 
+        plot = hPlot(k);
+    end
     for k = 1:length(hPlot)
-        set(hPlot(k), ...
+        set(plot, ...
             'LineSmoothing', 'on',...
             'LineWidth',2);
     end
@@ -43,8 +55,13 @@ end
 
 % Adjust fonts of the labels
 if ~isempty(hLabel)
-	for i = 1:length(hLabel)
-		set(hLabel(i), ...
+    for i = 1:length(hLabel)
+        if iscell(hLabel)
+            label = hLabel{i};
+        else
+            label = hLabel(i);
+        end
+        set(label, ...
 			'FontName'   , fontName ,...
 			'FontSize'   , 14          );
 	end
@@ -52,6 +69,11 @@ end
 
 % Make title purty:
 for j = 1:length(hTitle)
+    if iscell(hTitle)
+        title = hTitle{j};
+    else
+        title = hTitle(j);
+    end
 	set(hTitle(j)                    , ...
 		'FontName'   , fontName, ...
 		'FontSize'   , 14          , ...
