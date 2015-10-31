@@ -1,6 +1,5 @@
 function purty_plot(figNum, figurename)
 % Use purty_plot(figureNumber, desiredFigureName)
-addpath('./export_fig/')
 fontName = 'Helvetica';
 
 hFig = figNum;
@@ -45,7 +44,7 @@ end
 % Adjust fonts of the labels
 if ~isempty(hLabel)
 	for i = 1:length(hLabel)
-		set(hLabel{i}, ...
+		set(hLabel(i), ...
 			'FontName'   , fontName ,...
 			'FontSize'   , 14          );
 	end
@@ -53,7 +52,7 @@ end
 
 % Make title purty:
 for j = 1:length(hTitle)
-	set(hTitle{j}                    , ...
+	set(hTitle(j)                    , ...
 		'FontName'   , fontName, ...
 		'FontSize'   , 14          , ...
 		'FontWeight' , 'bold'      );
@@ -67,6 +66,9 @@ set([hLegend]                , ...
 
 set(gcf, 'PaperPositionMode', 'auto');
 
-figurename = [ figurename '.pdf'];
-print(figurename,'-dpdf')
+%figurename_eps = [ figurename '.eps'];
+%figurename_pdf =  [ figurename '.pdf'];
+figurename_png = [figurename '.png'];
+print(figurename_eps,'-dpng')
+%eps2pdf(figurename_eps, figurename_pdf)
 
